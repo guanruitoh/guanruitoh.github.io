@@ -40,9 +40,14 @@
         var database = firebase.database();
 
         function generateBarcode() {
-            var barcodeInput = document.getElementById('barcodeInput').value;
-            // Generate barcode and display it in the SVG
-            JsBarcode("#barcodeSvg", barcodeInput, { format: "CODE128" });
+            // Generate a random barcode
+            var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
+
+            // Display the generated barcode in the SVG
+            JsBarcode("#barcodeSvg", randomBarcode.toString(), { format: "CODE128" });
+
+            // Set the generated barcode in the input field
+            document.getElementById('barcodeInput').value = randomBarcode.toString();
         }
 
         function submitBarcode() {
@@ -55,9 +60,8 @@
                 if (error) {
                     alert('Barcode submission failed. Please try again.');
                 } else {
-                    alert('Barcode submitted successfully!');
-                    // Optionally, clear the input field or perform other actions after submission
-                    document.getElementById('barcodeInput').value = '';
+                    // Redirect to thanks_for_purchase.html with the generated barcode
+                    window.location.href = 'thanks_for_purchase.html?barcode=' + barcodeInput;
                 }
             });
         }
