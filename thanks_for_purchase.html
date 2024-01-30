@@ -6,6 +6,29 @@
     <title>Thank You!</title>
     <!-- Add JsBarcode library -->
     <script defer src="https://cdn.jsdelivr.net/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .main-content {
+            text-align: center;
+            max-width: 600px; /* Adjust the width as needed */
+        }
+
+        .additional-content {
+            margin-top: 20px;
+        }
+
+        .site-footer {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -44,13 +67,6 @@
 
         // Display the barcode on the canvas
         JsBarcode("#barcodeCanvas", generatedBarcode, { format: "CODE128" });
-
-        // Send the barcode to Firebase (you need to initialize Firebase here)
-        // For example:
-        // var firebaseConfig = { ... }; // Your Firebase configuration
-        // firebase.initializeApp(firebaseConfig);
-        // var database = firebase.database();
-        // database.ref('barcodes').push({ barcode: generatedBarcode });
     </script>
 </body>
 </html>
