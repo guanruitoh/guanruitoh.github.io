@@ -15,10 +15,6 @@
 
     <!-- Your Firebase configuration and initialization code -->
     <script defer>
-        // Import the necessary functions from the Firebase SDK
-        import { initializeApp } from "firebase/app";
-        import { getDatabase, ref, push } from "firebase/database";
-
         // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
@@ -31,8 +27,8 @@
         };
 
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
     </script>
 </head>
 <body>
@@ -63,7 +59,7 @@
             var barcodeInput = document.getElementById('barcodeInput').value;
 
             // Push barcode data to the 'barcodes' node in the database
-            push(ref(database, 'barcodes'), {
+            firebase.database().ref('barcodes').push({
                 barcode: barcodeInput
             }, function(error) {
                 if (error) {
