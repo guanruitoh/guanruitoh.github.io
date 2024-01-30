@@ -41,7 +41,10 @@
         // Extract barcode value from the URL query parameter
         var urlParams = new URLSearchParams(window.location.search);
         var barcodeValue = urlParams.get('barcode');
-
+        
+        // Debugging statements
+        console.log('Barcode Value:', barcodeValue);
+        
         // Display the barcode in the canvas
         JsBarcode("#barcode", barcodeValue);
     </script>
