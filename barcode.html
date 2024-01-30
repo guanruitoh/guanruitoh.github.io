@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Submission</title>
+    <!-- Add the Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
+    <!-- Add JsBarcode library -->
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
+</head>
+<body>
+    <form id="barcodeForm">
+        <label for="barcode">Generated Barcode:</label>
+        <svg id="barcodeSvg"></svg>
+
+        <label for="barcodeInput">Custom Barcode:</label>
+        <input type="text" id="barcodeInput" name="barcodeInput" required>
+
+        <button type="button" onclick="generateBarcode()">Generate Barcode</button>
+        <button type="button" onclick="submitBarcode()">Submit Barcode</button>
+    </form>
+
+    <script>
+        // Initialize Firebase with your project configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
+            authDomain: "devops-10d92.firebaseapp.com",
+            projectId: "devops-10d92",
+            storageBucket: "devops-10d92.appspot.com",
+            messagingSenderId: "658512427596",
+            appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
+            measurementId: "G-FPX12XED41"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        // Reference to the Firebase Realtime Database
+        var database = firebase.database();
+
+        function generateBarcode() {
+            var barcodeInput = document.getElementById('barcodeInput').value;
+            // Generate barcode and display it in the SVG
+            JsBarcode("#barcodeSvg", barcodeInput, { format: "CODE128" });
+        }
+
+        function submitBarcode() {
+            var barcodeInput = document.getElementById('barcodeInput').value;
+
+            // Push barcode data to the 'barcodes' node in the database
+            database.ref('barcodes').push({
+                barcode: barcodeInput
+            }, function(error) {
+                if (error) {
+                    alert('Barcode submission failed. Please try again.');
+                } else {
+                    alert('Barcode submitted successfully!');
+                    // Optionally, clear the input field or perform other actions after submission
+                    document.getElementById('barcodeInput').value = '';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
