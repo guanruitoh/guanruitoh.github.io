@@ -53,6 +53,9 @@
         function submitBarcode() {
             var barcodeInput = document.getElementById('barcodeInput').value;
 
+            // Debugging statement
+            console.log('Submitting Barcode:', barcodeInput);
+
             // Push barcode data to the 'barcodes' node in the database
             database.ref('barcodes').push({
                 barcode: barcodeInput
