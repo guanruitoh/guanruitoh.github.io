@@ -39,12 +39,21 @@
         }
 
         section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
             padding: 20px;
         }
 
         .item {
-            float: left;
+            width: 45%; /* Adjust as needed */
             margin: 20px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
         }
 
         img {
@@ -52,52 +61,50 @@
             height: auto;
             object-fit: cover;
         }
+
+        p {
+            margin: 0;
+        }
+
+        .buy-button {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Online Store</h1>
-        <img src="vendingmachine.jpg">
+        <img src="vendingmachine.jpg" alt="Vending Machine">
     </header>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#clothing">Drink1</a>
-        <a href="#electronics">Drink2</a>
-        <a href="#books">Drink3</a>
-    </nav>
-
     <section>
-        <div>
+        <div class="item">
             <a href='payment_input.html'>
-                <img style="width: 200px;
-                height: 200px;" src="drink1.jpg" alt="Clothing">
+                <img src="drink1.jpg" alt="Drink 1">
                 <p>Drink 1</p>
                 <p>$9.99</p>
                 <button class="buy-button" onclick="location.href='payment_input.html'">Buy Now</button>
             </a>
         </div>
 
-        <div>
+        <div class="item">
             <a href='payment_input.html'>
-                <img style="width: 200px;
-                height: 200px;" src="drink2.jpg" alt="Electronics">
+                <img src="drink2.jpg" alt="Drink 2">
                 <p>Drink 2</p>
                 <p>$9.99</p>
                 <button class="buy-button" onclick="location.href='payment_input.html'">Buy Now</button>
             </a>
         </div>
 
-        <div>
+        <div class="item">
             <a href='payment_input.html'>
-                <img style="width: 200px;
-                height: 200px;" src="drink3.jpg" alt="Books">
+                <img src="drink3.jpg" alt="Drink 3">
                 <p>Drink 3</p>
                 <p>$9.99</p>
                 <button class="buy-button" onclick="location.href='payment_input.html'">Buy Now</button>
             </a>
-       </div>
+        </div>
     </section>
 
 </body>
