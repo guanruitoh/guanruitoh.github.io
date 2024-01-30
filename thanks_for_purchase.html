@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You!</title>
+    <!-- Add JsBarcode library -->
+    <script defer src="https://cdn.jsdelivr.net/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <style>
         body {
             display: flex;
@@ -35,7 +37,7 @@
     </header>
 
     <div class="main-content">
-        <img id="barcodeImg" alt="Generated Barcode">
+        <svg id="barcodeSvg"></svg>
         <p class="main-content__body" data-lead-id="main-content-body">Thank you for your purchase! Please come back again!</p>
 
         <!-- Additional content -->
@@ -63,11 +65,8 @@
         // Retrieve the barcode value from the URL
         var generatedBarcode = getParameterByName('barcode');
 
-        // Display the barcode using Google Chart API
-        var barcodeImg = document.getElementById('barcodeImg');
-        barcodeImg.src = 'https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=' + generatedBarcode;
-        barcodeImg.width = 150;
-        barcodeImg.height = 150;
+        // Display the barcode on the SVG
+        JsBarcode("#barcodeSvg", generatedBarcode, { format: "CODE128" });
     </script>
 </body>
 </html>
