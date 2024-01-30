@@ -42,4 +42,31 @@
 
         <!-- Additional content -->
         <div class="additional-content">
-            <p class="additional-content__message">Your satisfaction
+            <p class="additional-content__message">Your satisfaction is our priority. If you have any questions or concerns, feel free to <a href="contact.html">contact us</a>.</p>
+        </div>
+    </div>
+
+    <footer class="site-footer" id="footer">
+        <p class="site-footer__fineprint" id="fineprint">Copyright ©2024 | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Function to parse URL parameters
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Retrieve the barcode value from the URL
+        var generatedBarcode = getParameterByName('barcode');
+
+        // Display the barcode on the SVG
+        JsBarcode("#barcodeSvg", generatedBarcode, { format: "CODE128" });
+    </script>
+</body>
+</html>
