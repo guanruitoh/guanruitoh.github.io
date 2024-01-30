@@ -42,6 +42,9 @@
         function generateBarcode() {
             // Generate a random barcode
             var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
+            
+            // Log the generated barcode
+            console.log('Generated Barcode:', randomBarcode);
 
             // Display the generated barcode in the SVG
             JsBarcode("#barcodeSvg", randomBarcode.toString(), { format: "CODE128" });
@@ -53,7 +56,7 @@
         function submitBarcode() {
             var barcodeInput = document.getElementById('barcodeInput').value;
 
-            // Debugging statement
+            // Log the submitted barcode
             console.log('Submitting Barcode:', barcodeInput);
 
             // Push barcode data to the 'barcodes' node in the database
