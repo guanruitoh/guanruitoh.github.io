@@ -8,7 +8,7 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const barcodeInDB = ref(database, "Barcode")
 
-const drinkType = document.getElementByID("value")
+const drinkType = document.getElementById("value")
 const addButton = document.getElementById("add_button")
 
 addButton.addEventListener("click",function() {
