@@ -24,15 +24,16 @@
     <div class="main-content">
         <p class="main-content_body" data-lead-id="main-content-body">Please use the barcode at the vending machine!</p>
         <canvas id="barcode"></canvas>
-        <script>JsBarcode("#barcode", "358853358");</script>
+        <script>
+            var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
+            JsBarcode("#barcode", randomBarcode.toString());
+        </script>
         <p class="main-content__body" data-lead-id="main-content-body">Thank you for your purchase! Please come back again!</p>
         
         <!-- Additional content -->
         <div class="additional-content">
             <p class="additional-content__message">Your satisfaction is our priority. If you have any questions or concerns, feel free to <a href="contact.html">contact us</a>.</p>
         </div>
-
-        <p>Redirecting to home page in 3 seconds...</p>
     </div>
     <button class="redirect-button" onclick="window.location.href = 'index.html'">Return to menu</button>
     <footer class="site-footer" id="footer">
