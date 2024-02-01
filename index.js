@@ -8,3 +8,4 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const barcodeInDB = ref(database, "Barcode")
+
