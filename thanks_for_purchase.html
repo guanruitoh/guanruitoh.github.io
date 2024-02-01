@@ -24,18 +24,9 @@
     <div class="main-content">
         <p class="main-content_body" data-lead-id="main-content-body">Please use the barcode at the vending machine!</p>
         <canvas id="barcode"></canvas>
-        <script>JsBarcode("#barcode", "358853358");</script>
-        <script src="index.js">
-        function generateBarcode() {
-            // Generate a random barcode
+        <script>
             var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
-
-            // Display the generated barcode in the SVG
-            JsBarcode("#barcodeSvg", randomBarcode.toString(), { format: "CODE128" });
-
-            // Set the generated barcode in the input field
-            document.getElementById('barcodeInput').value = randomBarcode.toString();
-        }</script>
+            JsBarcode("#barcode", "randomBarcode");</script>
         <p class="main-content__body" data-lead-id="main-content-body">Thank you for your purchase! Please come back again!</p>
         
         <!-- Additional content -->
