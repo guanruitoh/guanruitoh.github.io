@@ -6,11 +6,11 @@ const appSettings = {
 }
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
-const barcodeInDB = ref(database, "Barcode")
+const dataInDB = ref(database, "Data")
 
 const drinkType = document.getElementById("value")
 const addButton = document.getElementById("add_button")
 
 addButton.addEventListener("click",function() {
    let drinksVal = drinkType.value
-    push(barcodeInDB, drinksVal)
+    push(dataInDB, drinksVal)
