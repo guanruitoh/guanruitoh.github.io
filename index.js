@@ -14,4 +14,3 @@ const addButton = document.getElementById("add_button")
 addButton.addEventListener("click",function() {
    let drinksVal = drinkType.value
     push(barcodeInDB, drinksVal)
-    console.log('${drinksVal} added to database')
