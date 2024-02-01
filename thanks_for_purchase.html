@@ -26,7 +26,7 @@
         <canvas id="barcode"></canvas>
         <script>JsBarcode("#barcode", "358853358");</script>
         <script src="index.js">
-       export function generateBarcode() {
+        function generateBarcode() {
             // Generate a random barcode
             var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
 
@@ -35,7 +35,7 @@
 
             // Set the generated barcode in the input field
             document.getElementById('barcodeInput').value = randomBarcode.toString();
-        }
+        }</script>
         <p class="main-content__body" data-lead-id="main-content-body">Thank you for your purchase! Please come back again!</p>
         
         <!-- Additional content -->
