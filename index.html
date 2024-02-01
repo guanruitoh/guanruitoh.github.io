@@ -234,7 +234,8 @@
         };
       
         // Initialize Firebase
-        const { initializeApp, getAnalytics } = firebase;
+        const app = firebase.initializeApp(firebaseConfig);
+        const analytics = firebase.analytics();
       </script>
 </body>
 </html>
