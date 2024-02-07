@@ -35,8 +35,6 @@
         
         <script>
             
-            import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-            import { doc, setDoc,addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"; 
             var firebaseConfig = {
                 apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
                 authDomain: "devops-10d92.firebaseapp.com",
@@ -211,7 +209,7 @@
                     return;
                 }
                 //write data
-                try {
+                
                     await setDoc(doc(db, "test"), {
                         name: name,
                         cardnumber: cardNumber,
@@ -225,7 +223,7 @@
                     alert('An error occurred while processing your request. Please try again later.');
                 });
                     }
-                }
+                
         </script>
          
         
