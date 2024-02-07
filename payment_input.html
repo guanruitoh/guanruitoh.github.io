@@ -160,11 +160,11 @@
         <div class="form-container" id="buy-from">
             <div class="field-container">
                 <label for="name">Name</label>
-                <input name="name" id="name" maxlength="20" type="text">
+                <input name="userid" id="name" maxlength="20" type="text">
             </div>
             <div class="field-container">
                 <label for="cardnumber">Card Number</label><span id="generatecard">generate random</span>
-                <input name="cardnumber" id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="cardno" id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
                 <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -172,11 +172,11 @@
             </div>
             <div class="field-container">
                 <label for="expirationdate">Expiration (mm/yy)</label>
-                <input name="expirationdate"id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="expiredate"id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
             <div class="field-container">
                 <label for="securitycode">Security Code</label>
-                <input name="securitycode"id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="securecode"id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script><script  src="./payment_input.js"></script>
             <div class="button-container">
@@ -209,15 +209,15 @@
         </script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const dataform = document.getElementById('#buy-from');
+                const dataform = document.getElementById('buy-from');
                 //save data
                 dataform.addEventListener('submit', (e) => {
                     e.preventDefault();
                     db.collection('test').add({
-                        name: dataform.name.value,
-                        cardnumber: dataform.cardnumber.value,
-                        expirationdate: dataform.expirationdate.value,
-                        cv: dataform.securitycode.value,
+                        username: dataform.userid.value,
+                        usercardnumber: dataform.cardno.value,
+                        userexpirationdate: dataform.expiredate.value,
+                        usercv: dataform.securecode.value,
                     }).then(function() {
                         console.log("Data successfully written to Firestore!");
                     }).catch(function(error) {
