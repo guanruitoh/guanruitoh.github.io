@@ -220,10 +220,10 @@
                     e.preventDefault();
                     try {
                         await setDoc(doc(db, "test"), {
-                            name: dataform.name.value,
-                            cardnumber: dataform.cardnumber.value,
-                            expirationdate: dataform.expirationdate.value,
-                            cv: dataform.securitycode.value,
+                            name: "dataform.name.value",
+                            cardnumber: "222",
+                            expirationdate: "sss",
+                            cv: "sss",
                         });
                         console.log("Data successfully written to Firestore!");
                         dataform.reset();
@@ -236,5 +236,4 @@
         
     </body>
 
-    
 </html>
