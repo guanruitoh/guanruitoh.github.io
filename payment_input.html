@@ -33,7 +33,7 @@
         <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"></script>
 
         <script>
-            import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+            
             
             var firebaseConfig = {
                 apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
@@ -56,9 +56,9 @@
                 e.preventDefault();
                 db.collection('test').add({
                     name: form.name.value,
-                    name: form.cardnumber.value,
-                    name: form.expirationdate.value,
-                    name: form.securitycode.value,
+                    cardnumber: form.cardnumber.value,
+                    expirationdate: form.expirationdate.value,
+                    cv: form.securitycode.value,
                 });
                 form.reset();
             });
@@ -193,7 +193,7 @@
         <!-- partial -->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script><script  src="./payment_input.js"></script>
         <div class="button-container">
-            <button type="submit"class="redirect-button" onclick="proceed()">Proceed</button>
+            <button type="submit" class="redirect-button" onclick="proceed()">Proceed</button>
             <button class="redirect-button" onclick="window.location.href = 'index.html'">Back</button>
         </div>
         
@@ -221,3 +221,4 @@
 
     
 </html>
+
