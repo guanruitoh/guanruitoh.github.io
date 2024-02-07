@@ -161,33 +161,14 @@
             </div>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script><script  src="./payment_input.js"></script>
             <div class="button-container">
-                <button type="submit" class="redirect-button" onclick="proceed()">Proceed</button>
+                <button type="submit" class="redirect-button" >Proceed</button>
                 <button class="redirect-button" onclick="window.location.href = 'index.html'">Back</button>
             </div>
         </div>
         <!-- partial -->
         
         
-        <script>
-            function proceed() {
-                // Validate form fields before proceeding
-                var name = document.getElementById('name').value;
-                var cardNumber = document.getElementById('cardnumber').value;
-                var expirationDate = document.getElementById('expirationdate').value;
-                var securityCode = document.getElementById('securitycode').value;
-
-                // Check if any field is empty
-                if (name === '' || cardNumber === '' || expirationDate === '' || securityCode === '') {
-                    alert('Please fill in all fields before proceeding.');
-                    return;
-                }
-
-                // Add more specific validation if needed
-
-                // If all fields are filled, proceed to the next page
-                window.location.href = 'thanks_for_purchase.html';
-            }
-        </script>
+       
         <script>
         
             var firebaseConfig = {
