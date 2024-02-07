@@ -50,27 +50,7 @@
             db.settings({ timestampInSnapshots: true});
 
         </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-            const dataform = document.querySelector('#buy-from');
-            //save data
-            dataform.addEventListener('submit', (e) => {
-                e.preventDefault();
-                db.collection('test').add({
-                    name: dataform.name.value,
-                    cardnumber: dataform.cardnumber.value,
-                    expirationdate: dataform.expirationdate.value,
-                    cv: dataform.securitycode.value,
-                }).then(function() {
-                    console.log("Data successfully written to Firestore!");
-                }).catch(function(error) {
-                    console.error("Error writing document: ", error);
-                });
-                dataform.reset();
-            });
-        });
-
-        </script>
+        
     </head>
     <body>
 
@@ -206,25 +186,47 @@
         </div>
         
         <script>
-            function proceed() {
-                // Validate form fields before proceeding
-                var name = document.getElementById('name').value;
-                var cardNumber = document.getElementById('cardnumber').value;
-                var expirationDate = document.getElementById('expirationdate').value;
-                var securityCode = document.getElementById('securitycode').value;
-
-                // Check if any field is empty
-                if (name === '' || cardNumber === '' || expirationDate === '' || securityCode === '') {
-                    alert('Please fill in all fields before proceeding.');
-                    return;
+            document.addEventListener('DOMContentLoaded', function() {
+                const dataform = document.querySelector('#buy-from');
+        
+                // Attach click event listener to the "Proceed" button
+                const proceedButton = document.getElementById('proceed-button');
+                proceedButton.addEventListener('click', function() {
+                    // Validate form fields before proceeding
+                    var name = document.getElementById('name').value;
+                    var cardNumber = document.getElementById('cardnumber').value;
+                    var expirationDate = document.getElementById('expirationdate').value;
+                    var securityCode = document.getElementById('securitycode').value;
+        
+                    // Check if any field is empty
+                    if (name === '' || cardNumber === '' || expirationDate === '' || securityCode === '') {
+                        alert('Please fill in all fields before proceeding.');
+                        return;
+                    }
+        
+                    // If all fields are filled, save form data to Firestore
+                    saveFormData(dataform);
+                });
+        
+                // Function to save form data to Firestore
+                function saveFormData(form) {
+                    db.collection('test').add({
+                        name: form.name.value,
+                        cardnumber: form.cardnumber.value,
+                        expirationdate: form.expirationdate.value,
+                        cv: form.securitycode.value,
+                    }).then(function() {
+                        console.log("Data successfully written to Firestore!");
+                        // Optionally, redirect to another page after successful submission
+                        window.location.href = 'thanks_for_purchase.html';
+                    }).catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+                    form.reset();
                 }
-
-                // Add more specific validation if needed
-
-                // If all fields are filled, proceed to the next page
-                window.location.href = 'thanks_for_purchase.html';
-            }
+            });
         </script>
+        
     </body>
 
     
