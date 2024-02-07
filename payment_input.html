@@ -198,27 +198,29 @@
                 var expirationDate = document.getElementById('expirationdate').value;
                 var securityCode = document.getElementById('securitycode').value;
 
-                
                 // Check if any field is empty
                 if (name === '' || cardNumber === '' || expirationDate === '' || securityCode === '') {
                     alert('Please fill in all fields before proceeding.');
                     return;
                 }
-                //write data
-                
-                    await setDoc(doc(db, "test"), {
+
+                // Write data to Firestore
+                try {
+                    await db.collection("test").add({
                         name: name,
                         cardnumber: cardNumber,
                         expirationdate: expirationDate,
                         cv: securityCode,
-                    }).then(() => {
+                    });
+                    
                     // If data is successfully written, proceed to the next page
                     window.location.href = 'thanks_for_purchase.html';
-                }).catch((error) => {
+                } catch (error) {
                     console.error("Error writing document: ", error);
                     alert('An error occurred while processing your request. Please try again later.');
-                });
-                    }
+                }
+            }
+
                 
         </script>
          
