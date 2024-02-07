@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" >
     <head>
+        
         <meta charset="UTF-8">
         <title>Credit Card Input</title>
         <link href="https://fonts.googleapis.com/css?family=Raleway|Rock+Salt|Source+Code+Pro:300,400,600" rel="stylesheet">
@@ -29,6 +30,37 @@
             }
 
         </style>
+        
+        <script>
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+            import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js;
+            var firebaseConfig = {
+                apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
+                authDomain: "devops-10d92.firebaseapp.com",
+                databaseURL: "https://devops-10d92-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "devops-10d92",
+                storageBucket: "devops-10d92.appspot.com",
+                messagingSenderId: "658512427596",
+                appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
+                measurementId: "G-FPX12XED41"
+            };
+            firebase.initializeApp(firebaseConfig)
+            const db = firebase.firestore()
+            db.settings({ timestampInSnapshots: true});
+
+
+            const form = document.querySelector('#buy-from');
+            //save data
+            form.addEventListener('submit',(e)=>{
+                e.preventDefault();
+                db.collection('test').add({
+                    name: form.name.value,
+                    name: form.cardNumber.value,
+                    name: form.expirationDate.value,
+                    name: form.securityCode.value,
+                })
+            })
+        </script>
     </head>
     <body>
 
@@ -134,14 +166,14 @@
                 </div>
             </div>
         </div>
-        <div class="form-container">
+        <div class="form-container" id="buy-from">
             <div class="field-container">
                 <label for="name">Name</label>
-                <input id="name" maxlength="20" type="text">
+                <input name="name" id="name" maxlength="20" type="text">
             </div>
             <div class="field-container">
                 <label for="cardnumber">Card Number</label><span id="generatecard">generate random</span>
-                <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="cardnumber" id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
                 <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -149,11 +181,11 @@
             </div>
             <div class="field-container">
                 <label for="expirationdate">Expiration (mm/yy)</label>
-                <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="expirationdate "id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
             <div class="field-container">
                 <label for="securitycode">Security Code</label>
-                <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="securitycode"id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
         </div>
         <!-- partial -->
@@ -184,4 +216,6 @@
             }
         </script>
     </body>
+
+    
 </html>
