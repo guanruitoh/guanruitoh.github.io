@@ -183,7 +183,11 @@
             };
             firebase.initializeApp(firebaseConfig);
             const db = firebase.firestore();
-            db.settings({ timestampInSnapshots: true},{ merge: true });
+            db.settings({
+                timestampsInSnapshots: true,
+                merge: true
+            });
+
 
         </script>
         <script>
@@ -205,6 +209,12 @@
                     return;
                 }
 
+                // Prepare data
+                var name = "John Doe";
+                var cardNumber = "1234 5678 9012 3456";
+                var expirationDate = "12/24";
+                var securityCode = "123";
+
                 // Write data to Firestore
                 db.collection('test').add({
                     username: name,
@@ -214,13 +224,11 @@
                 })
                 .then(function(docRef) {
                     console.log("Data successfully written to Firestore with ID: ", docRef.id);
-                    // Redirect to 'thanks_for_purchase.html' after successful write
-                    window.location.href = 'thanks_for_purchase.html';
                 })
                 .catch(function(error) {
                     console.error("Error writing document: ", error);
-                    alert('An error occurred while processing your request. Please try again later.');
                 });
+
             });
         });
         </script>
