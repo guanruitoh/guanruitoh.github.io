@@ -191,19 +191,20 @@
             </div>
             <div class="field-container">
                 <label for="expirationdate">Expiration (mm/yy)</label>
-                <input name="expirationdate "id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input name="expirationdate"id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
             <div class="field-container">
                 <label for="securitycode">Security Code</label>
                 <input name="securitycode"id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script><script  src="./payment_input.js"></script>
+            <div class="button-container">
+                <button type="submit" class="redirect-button" onclick="proceed()">Proceed</button>
+                <button class="redirect-button" onclick="window.location.href = 'index.html'">Back</button>
+            </div>
         </div>
         <!-- partial -->
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script><script  src="./payment_input.js"></script>
-        <div class="button-container">
-            <button type="submit" class="redirect-button" onclick="proceed()">Proceed</button>
-            <button class="redirect-button" onclick="window.location.href = 'index.html'">Back</button>
-        </div>
+        
         
         <script>
             function proceed() {
