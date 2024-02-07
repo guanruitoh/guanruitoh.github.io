@@ -51,18 +51,25 @@
 
         </script>
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
             const dataform = document.querySelector('#buy-from');
             //save data
-            form.addEventListener('submit',(e)=>{
+            dataform.addEventListener('submit', (e) => {
                 e.preventDefault();
                 db.collection('test').add({
                     name: dataform.name.value,
                     cardnumber: dataform.cardnumber.value,
                     expirationdate: dataform.expirationdate.value,
                     cv: dataform.securitycode.value,
+                }).then(function() {
+                    console.log("Data successfully written to Firestore!");
+                }).catch(function(error) {
+                    console.error("Error writing document: ", error);
                 });
-                form.reset();
+                dataform.reset();
             });
+        });
+
         </script>
     </head>
     <body>
