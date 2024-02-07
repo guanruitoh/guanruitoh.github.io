@@ -161,7 +161,7 @@
             </div>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script><script  src="./payment_input.js"></script>
             <div class="button-container">
-                <button type="submit" class="redirect-button" >Proceed</button>
+                <button type="submit" class="redirect-button" onclick="proceed()">Proceed</button>
                 <button class="redirect-button" onclick="window.location.href = 'index.html'">Back</button>
             </div>
         </div>
@@ -190,47 +190,47 @@
 
 
         </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-            const dataform = document.getElementById('buy-from');
-            // Add event listener to form submission
-            dataform.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission behavior
+       
+         <script>
+            function proceed() {
+                // Validate form fields before proceeding
+                var name = document.getElementById('name').value;
+                var cardNumber = document.getElementById('cardnumber').value;
+                var expirationDate = document.getElementById('expirationdate').value;
+                var securityCode = document.getElementById('securitycode').value;
 
-                // Get form field values
-                var name = dataform.elements['name'].value;
-                var cardNumber = dataform.elements['cardnumber'].value;
-                var expirationDate = dataform.elements['expirationdate'].value;
-                var securityCode = dataform.elements['securitycode'].value;
-
-                // Validate form fields
-                if (name.trim() === '' || cardNumber.trim() === '' || expirationDate.trim() === '' || securityCode.trim() === '') {
+                // Check if any field is empty
+                if (name === '' || cardNumber === '' || expirationDate === '' || securityCode === '') {
                     alert('Please fill in all fields before proceeding.');
                     return;
                 }
 
-                // Prepare data
-                var name = "John Doe";
-                var cardNumber = "1234 5678 9012 3456";
-                var expirationDate = "12/24";
-                var securityCode = "123";
+                // Add more specific validation if needed
 
-                // Write data to Firestore
-                db.collection('test').add({
-                    username: name,
-                    usercardnumber: cardNumber,
-                    userexpirationdate: expirationDate,
-                    usercv: securityCode
-                })
-                .then(function(docRef) {
-                    console.log("Data successfully written to Firestore with ID: ", docRef.id);
-                })
-                .catch(function(error) {
-                    console.error("Error writing document: ", error);
+                // If all fields are filled, proceed to the next page
+                window.location.href = 'thanks_for_purchase.html';
+            }
+        </script>
+         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dataform = document.querySelector('#buy-from');
+                //save data
+                dataform.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    db.collection('test').add({
+                        name: dataform.name.value,
+                        cardnumber: dataform.cardnumber.value,
+                        expirationdate: dataform.expirationdate.value,
+                        cv: dataform.securitycode.value,
+                    }).then(function() {
+                        console.log("Data successfully written to Firestore!");
+                    }).catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+                    dataform.reset();
                 });
-
             });
-        });
+
         </script>
     </body>
 
