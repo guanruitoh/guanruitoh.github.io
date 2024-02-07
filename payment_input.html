@@ -49,16 +49,17 @@
             const db = firebase.firestore()
             db.settings({ timestampInSnapshots: true});
 
-
-            const form = document.querySelector('#buy-from');
+        </script>
+        <script>
+            const dataform = document.querySelector('#buy-from');
             //save data
             form.addEventListener('submit',(e)=>{
                 e.preventDefault();
                 db.collection('test').add({
-                    name: form.name.value,
-                    cardnumber: form.cardnumber.value,
-                    expirationdate: form.expirationdate.value,
-                    cv: form.securitycode.value,
+                    name: dataform.name.value,
+                    cardnumber: dataform.cardnumber.value,
+                    expirationdate: dataform.expirationdate.value,
+                    cv: dataform.securitycode.value,
                 });
                 form.reset();
             });
@@ -221,4 +222,3 @@
 
     
 </html>
-
