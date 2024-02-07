@@ -168,26 +168,7 @@
         <!-- partial -->
         
         
-        <script>
-            function proceed() {
-                // Validate form fields before proceeding
-                var name = document.getElementById('name').value;
-                var cardNumber = document.getElementById('cardnumber').value;
-                var expirationDate = document.getElementById('expirationdate').value;
-                var securityCode = document.getElementById('securitycode').value;
-
-                // Check if any field is empty
-                if (name === '' || cardNumber === '' || expirationDate === '' || securityCode === '') {
-                    alert('Please fill in all fields before proceeding.');
-                    return;
-                }
-
-                // Add more specific validation if needed
-
-                // If all fields are filled, proceed to the next page
-                window.location.href = 'thanks_for_purchase.html';
-            }
-        </script>
+        
         <script>
         
             var firebaseConfig = {
