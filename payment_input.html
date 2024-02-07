@@ -55,10 +55,14 @@
                 e.preventDefault();
                 db.collection('test').add({
                     name: form.name.value,
-                    name: form.cardNumber.value,
-                    name: form.expirationDate.value,
-                    name: form.securityCode.value,
-                })
+                    name: form.cardnumber.value,
+                    name: form.expirationdate.value,
+                    name: form.securitycode.value,
+                });
+                form.name.value="";
+                form.cardnumber.value="";
+                form.expirationdate.value="";
+                form.securitycode.value="";
             })
         </script>
     </head>
