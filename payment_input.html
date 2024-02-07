@@ -32,9 +32,7 @@
         </style>
         <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"></script>
-
-        
-        
+       
     </head>
     <body>
 
@@ -209,27 +207,43 @@
         </script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const dataform = document.getElementById('buy-from');
-                //save data
-                dataform.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    db.collection('test').add({
-                        username: dataform.userid.value,
-                        usercardnumber: dataform.cardno.value,
-                        userexpirationdate: dataform.expiredate.value,
-                        usercv: dataform.securecode.value,
-                    }).then(function() {
-                        console.log("Data successfully written to Firestore!");
-                    }).catch(function(error) {
-                        console.error("Error writing document: ", error);
-                    });
-                    dataform.reset();
+            const dataform = document.getElementById('buy-from');
+            // Add event listener to form submission
+            dataform.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission behavior
+
+                // Get form field values
+                var name = dataform.elements['name'].value;
+                var cardNumber = dataform.elements['cardnumber'].value;
+                var expirationDate = dataform.elements['expirationdate'].value;
+                var securityCode = dataform.elements['securitycode'].value;
+
+                // Validate form fields
+                if (name.trim() === '' || cardNumber.trim() === '' || expirationDate.trim() === '' || securityCode.trim() === '') {
+                    alert('Please fill in all fields before proceeding.');
+                    return;
+                }
+
+                // Write data to Firestore
+                db.collection('test').add({
+                    username: name,
+                    usercardnumber: cardNumber,
+                    userexpirationdate: expirationDate,
+                    usercv: securityCode
+                })
+                .then(function(docRef) {
+                    console.log("Data successfully written to Firestore with ID: ", docRef.id);
+                    // Redirect to 'thanks_for_purchase.html' after successful write
+                    window.location.href = 'thanks_for_purchase.html';
+                })
+                .catch(function(error) {
+                    console.error("Error writing document: ", error);
+                    alert('An error occurred while processing your request. Please try again later.');
                 });
             });
-
+        });
         </script>
     </body>
 
     
 </html>
-
