@@ -192,6 +192,24 @@
         </script>
        
          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dataform = document.querySelector('#buy-from');
+                //save data
+                dataform.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    db.collection('test').add({
+                        name: dataform.name.value,
+                        cardnumber: dataform.cardnumber.value,
+                        expirationdate: dataform.expirationdate.value,
+                        cv: dataform.securitycode.value,
+                    }).then(function() {
+                        console.log("Data successfully written to Firestore!");
+                    }).catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+                    dataform.reset();
+                });
+            });
             function proceed() {
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
@@ -211,27 +229,7 @@
                 window.location.href = 'thanks_for_purchase.html';
             }
         </script>
-         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const dataform = document.querySelector('#buy-from');
-                //save data
-                dataform.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    db.collection('test').add({
-                        name: dataform.name.value,
-                        cardnumber: dataform.cardnumber.value,
-                        expirationdate: dataform.expirationdate.value,
-                        cv: dataform.securitycode.value,
-                    }).then(function() {
-                        console.log("Data successfully written to Firestore!");
-                    }).catch(function(error) {
-                        console.error("Error writing document: ", error);
-                    });
-                    dataform.reset();
-                });
-            });
-
-        </script>
+         
     </body>
 
     
