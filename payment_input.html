@@ -170,7 +170,7 @@
         
         
         <script>
-        
+            import { doc, setDoc } from "firebase/firestore"; 
             var firebaseConfig = {
                 apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
                 authDomain: "devops-10d92.firebaseapp.com",
@@ -192,24 +192,7 @@
         </script>
        
          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const dataform = document.querySelector('#buy-from');
-                //save data
-                dataform.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    db.collection('test').add({
-                        name: dataform.name.value,
-                        cardnumber: dataform.cardnumber.value,
-                        expirationdate: dataform.expirationdate.value,
-                        cv: dataform.securitycode.value,
-                    }).then(function() {
-                        console.log("Data successfully written to Firestore!");
-                    }).catch(function(error) {
-                        console.error("Error writing document: ", error);
-                    });
-                    dataform.reset();
-                });
-            });
+            
             function proceed() {
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
@@ -229,7 +212,28 @@
                 window.location.href = 'thanks_for_purchase.html';
             }
         </script>
-         
+         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dataform = document.querySelector('#buy-from');
+                //save data
+                dataform.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await setDoc(doc(db, "test"), {
+                            name: dataform.name.value,
+                            cardnumber: dataform.cardnumber.value,
+                            expirationdate: dataform.expirationdate.value,
+                            cv: dataform.securitycode.value,
+                        });
+                        console.log("Data successfully written to Firestore!");
+                        dataform.reset();
+                    } catch (error) {
+                        console.error("Error writing document: ", error);
+                    }
+                });
+            });
+        </script>
+        
     </body>
 
     
