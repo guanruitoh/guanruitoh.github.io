@@ -30,10 +30,11 @@
             }
 
         </style>
-        
+        <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"></script>
+
         <script>
             import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-            import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js;
+            
             var firebaseConfig = {
                 apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
                 authDomain: "devops-10d92.firebaseapp.com",
@@ -59,11 +60,8 @@
                     name: form.expirationdate.value,
                     name: form.securitycode.value,
                 });
-                form.name.value="";
-                form.cardnumber.value="";
-                form.expirationdate.value="";
-                form.securitycode.value="";
-            })
+                form.reset();
+            });
         </script>
     </head>
     <body>
