@@ -49,7 +49,7 @@
                 if (docSnapshot.exists) {
                     // Retrieve barcode data from Firestore document
                     const barcodeData = docSnapshot.data().barcode;
-                    JsBarcode("#barcode", barcodeData.toString());
+                
                     // Display barcode using JsBarcode
                     JsBarcode("#barcodeContainer", barcodeData);
                 } else {
