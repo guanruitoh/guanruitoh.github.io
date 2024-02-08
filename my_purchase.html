@@ -42,11 +42,11 @@
         const db = firebase.firestore();
         db.settings({});
 
-        async function fetchPurchase() {
+         function fetchPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             
                 const docRef = db.collection("test").doc(phoneNumber);
-                const docSnapshot = await docRef.get();
+                const docSnapshot = docRef.get();
             const displayDiv = document.getElementById('displayValue');
                 if (docSnapshot.exists) {
                     var barcodeData = docSnapshot.data().barcode;
