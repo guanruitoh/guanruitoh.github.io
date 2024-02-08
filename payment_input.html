@@ -215,7 +215,7 @@
                     const docSnapshot = await db.collection("test").doc(number).get();
                     if (docSnapshot.exists) {
                         // Document with the same name already exists, prompt user to choose a different name
-                        alert('A document with the same number already exists. Please choose a different number.');
+                        alert('A purchase with the same number already exists. Please use a different number, or use the barcode.');
                         return;
                     }
                     await db.collection("test").doc(number).set({
