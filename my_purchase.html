@@ -22,19 +22,20 @@
         <input type="text" id="phoneNumber" name="phoneNumber" required>
         <button type="submit">Submit</button>
     </form>
-    <canvas id="barcodeContainer"></canvas>
+    <!-- Add a container for the barcode -->
+    <div id="barcodeContainer"></div>
 
     <script>
         // Initialize Firebase
         var firebaseConfig = {
             apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
-                authDomain: "devops-10d92.firebaseapp.com",
-                databaseURL: "https://devops-10d92-default-rtdb.asia-southeast1.firebasedatabase.app",
-                projectId: "devops-10d92",
-                storageBucket: "devops-10d92.appspot.com",
-                messagingSenderId: "658512427596",
-                appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
-                measurementId: "G-FPX12XED41"
+            authDomain: "devops-10d92.firebaseapp.com",
+            databaseURL: "https://devops-10d92defaultrtdb.asiasoutheast1.firebasedatabase.app",
+            projectId: "devops-10d92",
+            storageBucket: "devops-10d92.appspot.com",
+            messagingSenderId: "658512427596",
+            appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
+            measurementId: "G-FPX12XED41"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
@@ -47,6 +48,9 @@
                 const docSnapshot = await docRef.get();
                 if (docSnapshot.exists) {
                     const barcodeData = docSnapshot.data().barcode;
+                    // Clear previous barcode if any
+                    document.getElementById('barcodeContainer').innerHTML = '';
+                    // Render barcode onto the container
                     JsBarcode("#barcodeContainer", barcodeData.toString());
                 } else {
                     alert("No purchase made yet for this phone number.");
@@ -59,5 +63,6 @@
         }
     </script>
 </body>
+
 
 </html>
