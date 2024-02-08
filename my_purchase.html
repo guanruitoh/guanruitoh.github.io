@@ -48,7 +48,7 @@
 
     db.collection("test").doc(phoneNumber).get().then((doc) => {
         if (doc.exists) {
-            const barcodeData = doc.data().barcode.string();
+            const barcodeData = doc.data().barcode;
             if (typeof barcodeData === 'string' && barcodeData.trim() !== '') {
                 // Render barcode onto the container
                 JsBarcode("#barcodeContainer", barcodeData);
