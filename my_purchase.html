@@ -9,8 +9,8 @@
         @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
     </style>
     <!-- Include Firebase scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <!-- Include JsBarcode library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js" integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
@@ -21,48 +21,34 @@
         <label for="phoneNumber">Enter your phone number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber" required>
         <button type="submit">Submit</button>
-    
     </form>
     <canvas id="barcodeContainer"></canvas>
-    
 
     <script>
-        
+        // Initialize Firebase
         var firebaseConfig = {
-                apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
-                authDomain: "devops-10d92.firebaseapp.com",
-                databaseURL: "https://devops-10d92-default-rtdb.asia-southeast1.firebasedatabase.app",
-                projectId: "devops-10d92",
-                storageBucket: "devops-10d92.appspot.com",
-                messagingSenderId: "658512427596",
-                appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
-                measurementId: "G-FPX12XED41"
-            };
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-            db.settings({
-                timestampsInSnapshots: true,
-                merge: true
-            });
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID",
+            measurementId: "YOUR_MEASUREMENT_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        db.settings({});
 
         async function fetchPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             try {
-                const docRef = doc(db, "test", phoneNumber);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists) {
-                    // Retrieve barcode data from Firestore document
-                    if (docSnap.data().hasOwnProperty("barcode")) {
-                        const barcodeData = docSnap.data().barcode;
-                        console.log(`Value of field 'barcode' in document '${phoneNumber}': ${barcodeData}`);
-                    
-                        // Display barcode using JsBarcode
-                        JsBarcode("#barcodeContainer", barcodeData.toString());
-                    } else {
-                        alert("No barcode found for this phone number.");
-                    }
+                const docRef = db.collection("test").doc(phoneNumber);
+                const docSnapshot = await docRef.get();
+                if (docSnapshot.exists) {
+                    const barcodeData = docSnapshot.data().barcode;
+                    JsBarcode("#barcodeContainer", barcodeData.toString());
                 } else {
-                    alert("No purchase found for this phone number.");
+                    alert("No purchase made yet for this phone number.");
                 }
             } catch (error) {
                 console.error("Error fetching document: ", error);
