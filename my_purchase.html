@@ -42,23 +42,29 @@
         const db = firebase.firestore();
         db.settings({});
 
-         function fetchPurchase() {
-            db.collection("test").doc(phoneNumber).get().then((doc) => {
-    if (doc.exists) {
-        const barcodeData = doc.data().barcode;
-        // Render barcode onto the container
-        JsBarcode("#barcodeContainer", barcodeData.toString());
-    } else {
-        alert("No purchase made yet for this phone number.");
-    }
-}).catch((error) => {
-    console.log("Error getting document:", error);
-});
-
-            
-            return false; // Prevent form submission
-        }
     </script>
+    <script>function fetchPurchase() {
+    const phoneNumber = document.getElementById('phoneNumber').value;
+
+    db.collection("test").doc(phoneNumber).get().then((doc) => {
+        if (doc.exists) {
+            const barcodeData = doc.data().barcode;
+            if (typeof barcodeData === 'string' && barcodeData.trim() !== '') {
+                // Render barcode onto the container
+                JsBarcode("#barcodeContainer", barcodeData);
+            } else {
+                alert("Barcode data is invalid or empty.");
+            }
+        } else {
+            alert("No purchase made yet for this phone number.");
+        }
+    }).catch((error) => {
+        console.error("Error getting document:", error);
+    });
+
+    return false; // Prevent form submission
+}
+</script>
 </body>
 
 
