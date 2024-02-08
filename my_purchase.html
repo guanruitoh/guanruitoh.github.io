@@ -27,6 +27,8 @@
     
 
     <script>
+        import { initializeApp } from "firebase/app";
+        import { getFirestore, doc, getDoc } from "firebase/firestore";
         var firebaseConfig = {
                 apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
                 authDomain: "devops-10d92.firebaseapp.com",
@@ -47,11 +49,12 @@
         async function fetchPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             try {
-                const docSnapshot = await db.collection("test").doc(phoneNumber).get();
-                if (docSnapshot.exists) {
+                const docRef = doc(db, "test", phoneNumber);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists) {
                     // Retrieve barcode data from Firestore document
-                    if (docSnapshot.data().hasOwnProperty("barcode")) {
-                        const barcodeData = docSnapshot.data().barcode;
+                    if (docSnap.data().hasOwnProperty("barcode")) {
+                        const barcodeData = docSnap.data().barcode;
                         console.log(`Value of field 'barcode' in document '${phoneNumber}': ${barcodeData}`);
                     
                         // Display barcode using JsBarcode
