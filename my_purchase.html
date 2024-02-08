@@ -45,16 +45,14 @@
          function fetchPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             
-                 
-                const docSnapshot = db.collection("test").doc(phoneNumber).get();
+                var barcodeData = db.collection("test").doc(phoneNumber).get().data().barcode;
             const displayDiv = document.getElementById('displayValue');
-                if (docSnapshot.exists) {
-                    var barcodeData = docSnapshot.data().barcode;
+                
                     // Clear previous barcode if any
                     // Render barcode onto the container
                     JsBarcode("#barcodeContainer", barcodeData.toString());
                     
-                } else {
+                 else {
                     alert("No purchase made yet for this phone number.");
                 }
             
