@@ -211,7 +211,7 @@
 
                 // Write data to Firestore
                 try {
-                    await db.collection("test").add({
+                    await db.collection("test").doc(number).set({
                         name: name,
                         number: number,
                         cardnumber: cardNumber,
@@ -220,7 +220,9 @@
                     });
                     
                     // If data is successfully written, proceed to the next page
-                    window.location.href = 'thanks_for_purchase.html';
+                    // After adding the document to Firestore
+                    window.location.href = 'thanks_for_purchase.html?number=' + encodeURIComponent(number);
+
                 } catch (error) {
                     console.error("Error writing document: ", error);
                     alert('An error occurred while processing your request. Please try again later.');
