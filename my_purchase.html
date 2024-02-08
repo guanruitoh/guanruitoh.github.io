@@ -22,10 +22,21 @@
 
     <script>
         var firebaseConfig = {
-            // Your Firebase configuration
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+                apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
+                authDomain: "devops-10d92.firebaseapp.com",
+                databaseURL: "https://devops-10d92-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "devops-10d92",
+                storageBucket: "devops-10d92.appspot.com",
+                messagingSenderId: "658512427596",
+                appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
+                measurementId: "G-FPX12XED41"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            db.settings({
+                timestampsInSnapshots: true,
+                merge: true
+            });
 
         async function fetchPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value;
