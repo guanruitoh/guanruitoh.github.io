@@ -24,6 +24,7 @@
     </form>
     <!-- Add a container for the barcode -->
     <canvas id="barcodeContainer"></canvas>
+     <div id="displayValue"></div>
 
     <script>
         // Initialize Firebase
@@ -48,10 +49,10 @@
                 const docSnapshot = await docRef.get();
                 if (docSnapshot.exists) {
                     var barcodeData = docSnapshot.data().barcode;
-                    document.write('test')
                     // Clear previous barcode if any
                     // Render barcode onto the container
                     JsBarcode("#barcodeContainer", barcodeData.toString());
+                    const displayDiv = document.getElementById('displayValue');
                 } else {
                     alert("No purchase made yet for this phone number.");
                 }
