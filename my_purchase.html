@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Purchase</title>
+    <!-- Include Firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Include JsBarcode library -->
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+</head>
+
+<body>
+    <h1>My Purchase</h1>
+    <form onsubmit="return fetchPurchase()">
+        <label for="phoneNumber">Enter your phone number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="barcodeContainer"></div>
+
+    <script>
+        var firebaseConfig = {
+            // Your Firebase configuration
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        async function fetchPurchase() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            try {
+                const docSnapshot = await db.collection("test").doc(phoneNumber).get();
+                if (docSnapshot.exists) {
+                    // Retrieve barcode data from Firestore document
+                    const barcodeData = docSnapshot.data().barcode;
+                    // Display barcode using JsBarcode
+                    JsBarcode("#barcodeContainer", barcodeData);
+                } else {
+                    alert("No purchase found for this phone number.");
+                }
+            } catch (error) {
+                console.error("Error fetching document: ", error);
+                alert("An error occurred while fetching data. Please try again later.");
+            }
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+
+</html>
