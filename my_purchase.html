@@ -47,7 +47,7 @@
                 const docRef = db.collection("test").doc(phoneNumber);
                 const docSnapshot = await docRef.get();
                 if (docSnapshot.exists) {
-                    const barcodeData = docSnapshot.data().barcode.toNumber();
+                    var barcodeData = docSnapshot.data().barcode.toNumber();
                     // Clear previous barcode if any
                     document.getElementById('barcodeContainer').innerHTML = '';
                     // Render barcode onto the container
