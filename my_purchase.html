@@ -47,12 +47,13 @@
             
                 const docRef = db.collection("test").doc(phoneNumber);
                 const docSnapshot = await docRef.get();
+            const displayDiv = document.getElementById('displayValue');
                 if (docSnapshot.exists) {
                     var barcodeData = docSnapshot.data().barcode;
                     // Clear previous barcode if any
                     // Render barcode onto the container
                     JsBarcode("#barcodeContainer", barcodeData.toString());
-                    const displayDiv = document.getElementById('displayValue');
+                    
                 } else {
                     alert("No purchase made yet for this phone number.");
                 }
