@@ -51,7 +51,10 @@
                 const docSnapshot = await db.collection("test").doc(phoneNumber).get();
                 if (docSnapshot.exists) {
                     // Retrieve barcode data from Firestore document
-                    const barcodeData = docSnapshot.data().barcode;
+                    if (docSnapshot.data().hasOwnProperty(barcode)) {
+                    const fieldValue = docSnapshot.data()[barcode];
+                    console.log(`Value of field '${barcode}' in document '${phoneNumber}': ${fieldValue}`);
+                    return fieldValue;
                 
                     // Display barcode using JsBarcode
                     JsBarcode("#barcodeContainer", barcodeData.toString());
