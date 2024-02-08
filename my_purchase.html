@@ -43,18 +43,18 @@
         db.settings({});
 
          function fetchPurchase() {
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            
-                var barcodeData = db.collection("test").doc(phoneNumber).get().data().barcode;
-            const displayDiv = document.getElementById('displayValue');
-                
-                    // Clear previous barcode if any
-                    // Render barcode onto the container
-                    JsBarcode("#barcodeContainer", barcodeData.toString());
-                    
-                 else {
-                    alert("No purchase made yet for this phone number.");
-                }
+            db.collection("test").doc(phoneNumber).get().then((doc) => {
+    if (doc.exists) {
+        const barcodeData = doc.data().barcode;
+        // Render barcode onto the container
+        JsBarcode("#barcodeContainer", barcodeData.toString());
+    } else {
+        alert("No purchase made yet for this phone number.");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+
             
             return false; // Prevent form submission
         }
