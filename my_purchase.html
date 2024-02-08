@@ -54,7 +54,7 @@
                     const barcodeData = docSnapshot.data().barcode;
                 
                     // Display barcode using JsBarcode
-                    JsBarcode("#barcodeContainer", barcodeData);
+                    JsBarcode("#barcodeContainer", barcodeData.toString());
                 } else {
                     alert("No purchase found for this phone number.");
                 }
