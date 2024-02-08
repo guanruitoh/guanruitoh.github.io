@@ -14,6 +14,29 @@
     <script src="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/jquery-1.9.1.min.js"></script>
     <script src="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/html5shiv.js"></script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js" integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+            
+        var firebaseConfig = {
+            apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
+            authDomain: "devops-10d92.firebaseapp.com",
+            databaseURL: "https://devops-10d92-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "devops-10d92",
+            storageBucket: "devops-10d92.appspot.com",
+            messagingSenderId: "658512427596",
+            appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
+            measurementId: "G-FPX12XED41"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        db.settings({
+            timestampsInSnapshots: true,
+            merge: true
+        });
+
+
+    </script>
 </head>
 <body>
     
@@ -25,8 +48,15 @@
         <p class="main-content_body" data-lead-id="main-content-body">Please use the barcode at the vending machine!</p>
         <canvas id="barcode"></canvas>
         <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const number = urlParams.get('number');
+
             var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
             JsBarcode("#barcode", randomBarcode.toString());
+            db.collection("test").doc(number).set({
+                        barcode: randomBarcode,
+                    });
         </script>
         <p class="main-content__body" data-lead-id="main-content-body">Thank you for your purchase! Please come back again!</p>
         
