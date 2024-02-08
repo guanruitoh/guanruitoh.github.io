@@ -48,6 +48,7 @@
                 const docSnapshot = await docRef.get();
                 if (docSnapshot.exists) {
                     var barcodeData = docSnapshot.data().barcode.toNumber();
+                    document.write(barcodeData)
                     // Clear previous barcode if any
                     document.getElementById('barcodeContainer').innerHTML = '';
                     // Render barcode onto the container
