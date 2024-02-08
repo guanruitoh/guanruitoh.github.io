@@ -13,7 +13,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <!-- Include JsBarcode library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js" integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 </head>
 
 <body>
@@ -51,13 +50,15 @@
                 const docSnapshot = await db.collection("test").doc(phoneNumber).get();
                 if (docSnapshot.exists) {
                     // Retrieve barcode data from Firestore document
-                    if (docSnapshot.data().hasOwnProperty(barcode)) {
-                    const fieldValue = docSnapshot.data()[barcode];
-                    console.log(`Value of field '${barcode}' in document '${phoneNumber}': ${fieldValue}`);
-                    return fieldValue;
-                
-                    // Display barcode using JsBarcode
-                    JsBarcode("#barcodeContainer", barcodeData.toString());
+                    if (docSnapshot.data().hasOwnProperty("barcode")) {
+                        const barcodeData = docSnapshot.data().barcode;
+                        console.log(`Value of field 'barcode' in document '${phoneNumber}': ${barcodeData}`);
+                    
+                        // Display barcode using JsBarcode
+                        JsBarcode("#barcodeContainer", barcodeData.toString());
+                    } else {
+                        alert("No barcode found for this phone number.");
+                    }
                 } else {
                     alert("No purchase found for this phone number.");
                 }
