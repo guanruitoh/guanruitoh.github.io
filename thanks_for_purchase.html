@@ -54,7 +54,7 @@
 
             var randomBarcode = Math.floor(Math.random() * 900000000) + 100000000;
             JsBarcode("#barcode", randomBarcode.toString());
-            db.collection("test").doc(number).add({
+            db.collection("test").doc(number).update({
                         barcode: randomBarcode,
                     });
         </script>
