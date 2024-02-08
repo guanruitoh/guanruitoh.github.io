@@ -211,6 +211,13 @@
 
                 // Write data to Firestore
                 try {
+                    // Check if a document with the same name already exists
+                    const docSnapshot = await db.collection("test").doc(number).get();
+                    if (docSnapshot.exists) {
+                        // Document with the same name already exists, prompt user to choose a different name
+                        alert('A document with the same number already exists. Please choose a different number.');
+                        return;
+                    }
                     await db.collection("test").doc(number).set({
                         name: name,
                         number: number,
@@ -228,11 +235,6 @@
                     alert('An error occurred while processing your request. Please try again later.');
                 }
             }
-
-                
         </script>
-         
-        
     </body>
-
 </html>
