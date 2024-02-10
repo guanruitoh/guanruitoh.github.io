@@ -3,10 +3,75 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Purchase</title>
     <style>
-        @import url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);
-        @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .heading {
+            color: #333;
+        }
+
+        .form {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .barcode-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
     </style>
     <!-- Include Firebase scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -16,56 +81,59 @@
 </head>
 
 <body>
-    <h1>My Purchase</h1>
-    <form onsubmit="return fetchPurchase()">
-        <label for="phoneNumber">Enter your phone number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required>
-        <button type="submit">Submit</button>
-    </form>
-    <!-- Add a container for the barcode -->
-    <canvas id="barcodeContainer"></canvas>
-     <div id="displayValue"></div>
+    <div class="container">
+        <h1 class="heading">My Purchase</h1>
+        <form onsubmit="return fetchPurchase()" class="form">
+            <label for="phoneNumber" class="label">Enter your phone number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="input" required>
+            <button type="submit" class="button">Submit</button>
+        </form>
+        <!-- Add a container for the barcode -->
+        <div class="barcode-container">
+            <canvas id="barcodeContainer"></canvas>
+        </div>
+        <div id="displayValue"></div>
+    </div>
 
     <script>
         // Initialize Firebase
         var firebaseConfig = {
-            apiKey: "AIzaSyBo8djp3hGPhsB-96McKlhXZf1A05ZXHo8",
-            authDomain: "devops-10d92.firebaseapp.com",
-            databaseURL: "https://devops-10d92defaultrtdb.asiasoutheast1.firebasedatabase.app",
-            projectId: "devops-10d92",
-            storageBucket: "devops-10d92.appspot.com",
-            messagingSenderId: "658512427596",
-            appId: "1:658512427596:web:7c952bea1f04f6abc312e9",
-            measurementId: "G-FPX12XED41"
+            apiKey: "<Your API Key>",
+            authDomain: "<Your Auth Domain>",
+            databaseURL: "<Your Database URL>",
+            projectId: "<Your Project ID>",
+            storageBucket: "<Your Storage Bucket>",
+            messagingSenderId: "<Your Messaging Sender ID>",
+            appId: "<Your App ID>",
+            measurementId: "<Your Measurement ID>"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         db.settings({});
-
     </script>
-    <script>function fetchPurchase() {
-    const phoneNumber = document.getElementById('phoneNumber').value;
+    <script>
+        function fetchPurchase() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
 
-    db.collection("test").doc(phoneNumber).get().then((doc) => {
-        if (doc.exists) {
-            const barcodeData = doc.data().barcode;
-            if (typeof barcodeData === 'string' && barcodeData.trim() !== '') {
-                // Render barcode onto the container
-                JsBarcode("#barcodeContainer", barcodeData);
-            } else {
-                alert("Barcode data is invalid or empty.");
-            }
-        } else {
-            alert("No purchase made yet for this phone number.");
+            db.collection("test").doc(phoneNumber).get().then((doc) => {
+                if (doc.exists) {
+                    const barcodeData = doc.data().barcode;
+                    if (typeof barcodeData === 'string' && barcodeData.trim() !== '') {
+                        // Render barcode onto the container
+                        JsBarcode("#barcodeContainer", barcodeData);
+                    } else {
+                        alert("Barcode data is invalid or empty.");
+                    }
+                } else {
+                    alert("No purchase made yet for this phone number.");
+                }
+            }).catch((error) => {
+                console.error("Error getting document:", error);
+            });
+
+            return false; // Prevent form submission
         }
-    }).catch((error) => {
-        console.error("Error getting document:", error);
-    });
-
-    return false; // Prevent form submission
-}
-</script>
+    </script>
 </body>
-
 
 </html>
