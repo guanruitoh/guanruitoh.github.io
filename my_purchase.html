@@ -14,7 +14,7 @@
     <!-- Include JsBarcode library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js" integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
-        body {
+          body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0; /* Background color */
             margin: 0;
@@ -26,8 +26,17 @@
             text-align: center;
         }
 
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff; /* Container background color */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
         h1 {
-            
+            margin-bottom: 20px;
             font-size: 24px; /* Larger font size */
             color: #333; /* Text color */
         }
@@ -63,6 +72,10 @@
             background-color: #0056b3;
         }
 
+        .barcode-container {
+            margin-bottom: 20px;
+        }
+
         canvas {
             max-width: 100%;
             height: auto;
@@ -73,15 +86,18 @@
 </head>
 
 <body>
-    <h1>My Purchase</h1>
-    <form onsubmit="return fetchPurchase()">
-        <label for="phoneNumber">Enter your phone number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required>
-        <button type="submit">Submit</button>
-    </form>
-    <!-- Add a container for the barcode -->
-    <canvas id="barcodeContainer"></canvas>
-     <div id="displayValue"></div>
+    <div class="container">
+        <h1>My Purchase</h1>
+        <form onsubmit="return fetchPurchase()">
+            <label for="phoneNumber">Your Phone number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+            <button type="submit">Submit</button>
+        </form>
+        <!-- Add a container for the barcode -->
+        <div class="barcode-container">
+            <canvas id="barcodeContainer"></canvas>
+        </div>
+    </div>
 
     <script>
         // Initialize Firebase
