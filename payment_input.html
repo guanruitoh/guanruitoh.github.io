@@ -196,6 +196,9 @@
          <script>
             
             async function proceed() {
+                // Get the unique ID from the query parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get('id');
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
                 var number = document.getElementById('number').value;
@@ -219,6 +222,7 @@
                         return;
                     }
                     await db.collection("test").doc(number).set({
+                        id: id,
                         name: name,
                         number: number,
                         cardnumber: cardNumber,
