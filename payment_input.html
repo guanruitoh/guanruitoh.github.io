@@ -198,7 +198,7 @@
             async function proceed() {
                 // Get the unique ID from the query parameter
                 const urlParams = new URLSearchParams(window.location.search);
-                var id = urlParams.get('id').toString();
+                var id = urlParams.get('id').tostring();
                 console.log("Drink ID in payment input:", id);
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
