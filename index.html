@@ -107,7 +107,7 @@
 
     <section>
         <div class="item">
-            <a href='payment_input.html'>
+            <a href='javascript:void(0)' onclick="redirectToPayment('1')">
                 <img src="drink1.jpg" alt="Drink 1">
                 <p>Drink 1</p>
                 <p>$9.99</p>
@@ -117,7 +117,7 @@
         </div>
 
         <div class="item">
-            <a href='payment_input.html'>
+            <a href='javascript:void(0)' onclick="redirectToPayment('2')">
                 <img src="drink2.jpg" alt="Drink 2">
                 <p>Drink 2</p>
                 <p>$1.50</p>
@@ -126,7 +126,7 @@
         </div>
 
         <div class="item">
-            <a href='payment_input.html'>
+            <a href='javascript:void(0)' onclick="redirectToPayment('3')">
                 <img src="drink3.jpg" alt="Drink 3">
                 <p>Drink 3</p>
                 <p>$9.99</p>
@@ -134,7 +134,7 @@
             </a>
         </div>
         <div class="item">
-            <a href='payment_input.html'>
+            <a href='javascript:void(0)' onclick="redirectToPayment('4')">
                 <img src="drink4.jpg" alt="Drink 4">
                 <p>Drink 4</p>
                 <p>$1.00</p>
@@ -151,8 +151,9 @@
    
 <script>
         function redirectToPayment(drinkId) {
-        location.href = 'payment_input.html?id=' + encodeURIComponent(drinkId.toString());
-        }
+    location.href = 'payment_input.html?id=' + encodeURIComponent(drinkId.toString());
+}
+
 
 </script>
 
