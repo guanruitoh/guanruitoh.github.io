@@ -200,7 +200,7 @@
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
 
-                const drinkId = urlParams.get('drinkId').toString();
+                const drinkId = urlParams.get('drinkId');
                 console.log(id);
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
