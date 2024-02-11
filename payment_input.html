@@ -200,7 +200,7 @@
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
 
-                const id = urlParams.get('id').toString();
+                const drinkId = urlParams.get('drinkId').toString();
                 console.log(id);
                 // Validate form fields before proceeding
                 var name = document.getElementById('name').value;
@@ -225,7 +225,7 @@
                         return;
                     }
                     await db.collection("test").doc(number).set({
-                        id: id,
+                        id: drinkId,
                         name: name,
                         number: number,
                         cardnumber: cardNumber,
